@@ -1,0 +1,19 @@
+.popup-image__text {
+  width: 240px;
+  max-height: 12px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+}
+
+@media screen and (min-width: 880px) {
+  .popup-image__text {
+    max-width: 816px;
+    margin: 10px 40px 0;
+  }
+}

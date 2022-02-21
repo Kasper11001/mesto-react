@@ -1,0 +1,30 @@
+.form__safe-btn {
+  min-width: 238px;
+  min-height: 46px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  background-color: black;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 48px 0 0 0;
+}
+
+.form__safe-btn:hover {
+  opacity: .8;
+  transition: .3s;
+}
+
+@media screen and (min-width: 880px) {
+  .form__safe-btn {
+    font-size: 18px;
+    line-height: 22px;
+    min-height: 50px;
+    min-width: 358px;
+  }
+}

@@ -1,0 +1,6 @@
+.form__safe-btn_unactive {
+  border: 1px solid #000000;
+  background-color: white;
+  opacity: 0.2;
+  color: #000000;
+}

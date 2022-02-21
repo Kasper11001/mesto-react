@@ -1,0 +1,20 @@
+.form__field {
+  padding: 0;
+  width: 100%;
+  min-height: 21px;
+  margin-top: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+@media screen and (min-width: 880px) {
+  .form__field {
+    min-height: 26px;
+  }
+}

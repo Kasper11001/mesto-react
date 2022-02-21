@@ -1,0 +1,13 @@
+.cards {
+  margin: 0;
+  padding-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 880px) {
+  .cards {
+    padding-top: 50px;
+  }
+}

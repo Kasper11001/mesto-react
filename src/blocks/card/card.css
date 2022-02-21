@@ -1,0 +1,12 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 282px;
+  min-height: 361px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+
