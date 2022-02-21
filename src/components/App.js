@@ -2,10 +2,17 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import React from "react";
+import { useState } from "react";
 import ImagePopup from "./ImagePopup";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [isOpenImagePopup, setIsOpenImagePopup] = useState(false);
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -21,6 +28,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsDeleteCardPopupOpen(false);
     setIsOpenImagePopup(false);
+    setSelectedCard({});
   }
   function deleteCardOpenPopup() {
     setIsDeleteCardPopupOpen(true);
@@ -33,39 +41,20 @@ function App() {
     setIsOpenImagePopup(true);
   }
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
-  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] =
-    React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [isOpenImagePopup, setIsOpenImagePopup] = React.useState(false);
-
   return (
     <div className="page">
       <ImagePopup
         selectedCard={selectedCard}
         isOpen={isOpenImagePopup}
         onClose={handleClosePopup}
-      >
-        <div className="popup popup-image">
-          <div className="popup__container popup-image__container">
-            <button
-              className="popup__close-icon popup-image__close-icon"
-              type="button"
-            ></button>
-            <img className="popup-image__block" src="#" alt="#" />
-            <p className="popup-image__text">Карачаево-Черкессия</p>
-          </div>
-        </div>
-      </ImagePopup>
+        name={"popup-image"}
+      ></ImagePopup>
       <PopupWithForm
         onClose={handleClosePopup}
         isOpen={isEditProfilePopupOpen}
         name={"popup-edit-profile"}
         title={"Редактировать профиль"}
+        safe={"Сохранить"}
       >
         <form className="form__fields form-edit-profile" name="add" noValidate>
           <input
@@ -92,9 +81,6 @@ function App() {
             required
           />
           <span id="profession-error" className="error"></span>
-          <button className="form__safe-btn" type="submit">
-            Сохранить
-          </button>
         </form>
       </PopupWithForm>
       <PopupWithForm
@@ -102,18 +88,16 @@ function App() {
         title={"Вы уверены?"}
         name={"popup-confirmation"}
         isOpen={isDeleteCardPopupOpen}
+        safe={"Да"}
       >
-        <form className="form__fields" name="confirmation" noValidate>
-          <button className="form__safe-btn" type="submit">
-            Да
-          </button>
-        </form>
+        <form className="form__fields" name="confirmation" noValidate></form>
       </PopupWithForm>
       <PopupWithForm
         onClose={handleClosePopup}
         isOpen={isEditAvatarPopupOpen}
         name={"popup-confirmation-edit-profile"}
         title={"Обновить аватар"}
+        safe={"Сохранить"}
       >
         <form className="form__fields" name="edit" noValidate>
           <input
@@ -128,9 +112,6 @@ function App() {
             required
           />
           <span id="link-error" className="error"></span>
-          <button className="form__safe-btn" type="submit">
-            Сохранить
-          </button>
         </form>
       </PopupWithForm>
       <PopupWithForm
@@ -138,6 +119,7 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         name={"popup-new-card"}
         title={"Новое место"}
+        safe={"Сохранить"}
       >
         <form className="form__fields form-add-card" name="place" noValidate>
           <input
@@ -162,12 +144,6 @@ function App() {
             required
           />
           <span id="newCardLink-error" className="error"></span>
-          <button
-            className="form__safe-btn form-new-card__safe-btn"
-            type="submit"
-          >
-            Сохранить
-          </button>
         </form>
       </PopupWithForm>
       <Header />
