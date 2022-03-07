@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 import Card from "./Card";
 
 function Main(props) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
 
-  const cardItems = cards.map((card, i) => (
+  const cardItems = props.cards.map((card, i) => (
     <Card
+      onCardDelete={props.onCardDelete}
+      onCardLike={props.onCardLike}
       onCardClick={props.onCardClick}
       key={card._id}
       card={card}
@@ -17,39 +17,26 @@ function Main(props) {
       handleCardClick={props.handleCardClick}
     />
   ));
-  useEffect(() => {
-    api
-      .getProfileData()
-      .then((data) => {
-        setUserAvatar(data.avatar);
-        setUserDescription(data.about);
-        setUserName(data.name);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+
   return (
     <main className="main container">
       <section className="profile">
         <div className="profile__edit-block">
           <div onClick={props.onEditAvatar} className="profile__marker"></div>
-          <img className="profile__avatar" src={userAvatar} alt="Аватар" />
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt="Аватар"
+          />
         </div>
         <div className="profile__info">
-          <h1 className="profile__name">{userName}</h1>
+          <h1 className="profile__name">{currentUser.name}</h1>
           <button
             onClick={props.onEditProfile}
             className="profile__edit-button"
             type="button"
           ></button>
-          <p className="profile__about">{userDescription}</p>
+          <p className="profile__about">{currentUser.about}</p>
         </div>
         <button
           onClick={props.onAddPlace}

@@ -13,10 +13,17 @@ function PopupWithForm(props) {
         ></button>
         <div className="form">
           <h2 className="form__title">{props.title}</h2>
-          {props.children}
-          <button className="form__safe-btn" type="submit">
-            {props.safe}
-          </button>
+          <form
+            className="form__fields"
+            name="confirmation"
+            noValidate
+            onSubmit={props.onSubmit}
+          >
+            {props.children}
+            <button className="form__safe-btn" type="submit">
+              {props.safe}
+            </button>
+          </form>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 .card__delete-icon {
+  visibility: hidden;
   background-image: url(../../../images/del-icon.svg);
   cursor: pointer;
   background-repeat: no-repeat;

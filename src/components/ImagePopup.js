@@ -1,7 +1,6 @@
 import React from "react";
 
 function ImagePopup(props) {
-  console.log(props.isOpen);
   return (
     <div
       className={`popup  ${props.name} ${props.isOpen ? "popup_opened" : ""}`}
