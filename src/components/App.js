@@ -25,9 +25,12 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
       setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    })
+    .catch((err) => console.log(err)); 
+
   }
 
   function handleCardDelete(card) {
@@ -37,7 +40,7 @@ function App() {
         const newArrCards = cards.filter((oldCard) => oldCard._id !== card._id);
         setCards(newArrCards);
       })
-      .catch((err) => console.log(err));
+     .catch((err) => console.log(err)); 
   }
   useEffect(() => {
     api
@@ -59,11 +62,13 @@ function App() {
   function handleUpdateUser(formValues) {
     api
       .updateProfileData(formValues)
-      .then((data) => setCurrentUser(data))
+      .then((data) => {
+        setCurrentUser(data);
+        formValues.name = "";
+        formValues.about = "";
+        handleClosePopup();
+      })
       .catch((err) => console.log(err));
-    setIsEditProfilePopupOpen(false);
-    formValues.name = "";
-    formValues.about = "";
   }
 
   function handleEditAvatarClick() {
@@ -98,15 +103,17 @@ function App() {
       .updateProfileAvatar(formValues)
       .then((data) => {
         setCurrentUser(data);
+        handleClosePopup();
       })
       .catch((err) => console.log(err));
-    setIsEditAvatarPopupOpen(false);
   }
   function handleAddPlaceSubmit(formValues) {
-    api.addCard(formValues).then((newCard) => {
+    api.addCard(formValues)
+    .then((newCard) => {
       setCards([newCard, ...cards]);
-    });
-    setIsAddPlacePopupOpen(false);
+      handleClosePopup();
+    })
+    .catch((err) => console.log(err)); 
   }
 
   return (
