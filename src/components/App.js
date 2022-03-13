@@ -25,12 +25,14 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked)
-    .then((newCard) => {
-      setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
-    })
-    .catch((err) => console.log(err)); 
-
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((cards) =>
+          cards.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleCardDelete(card) {
@@ -40,7 +42,7 @@ function App() {
         const newArrCards = cards.filter((oldCard) => oldCard._id !== card._id);
         setCards(newArrCards);
       })
-     .catch((err) => console.log(err)); 
+      .catch((err) => console.log(err));
   }
   useEffect(() => {
     api
@@ -108,14 +110,34 @@ function App() {
       .catch((err) => console.log(err));
   }
   function handleAddPlaceSubmit(formValues) {
-    api.addCard(formValues)
-    .then((newCard) => {
-      setCards([newCard, ...cards]);
-      handleClosePopup();
-    })
-    .catch((err) => console.log(err)); 
+    api
+      .addCard(formValues)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        handleClosePopup();
+      })
+      .catch((err) => console.log(err));
   }
 
+  // ---------------------------------------------------------------
+  //-----Кривая реализация закрытия попапов по Esc------------------
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleKeyPress);
+  // }, [
+  //   isEditProfilePopupOpen,
+  //   isAddPlacePopupOpen,
+  //   isEditAvatarPopupOpen,
+  //   isOpenImagePopup,
+  // ]);
+
+  // const handleKeyPress = (event) => {
+  //   if (event.key === "Escape") {
+  //     console.log(event.key);
+  //     handleClosePopup();
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   }
+  // };
+  //---------------------------------------------------------------
   return (
     <div className="page">
       <ImagePopup

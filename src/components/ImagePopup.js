@@ -3,9 +3,13 @@ import React from "react";
 function ImagePopup(props) {
   return (
     <div
+      onClick={props.onClose}
       className={`popup  ${props.name} ${props.isOpen ? "popup_opened" : ""}`}
     >
-      <div className="popup__container popup-image__container">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="popup__container popup-image__container"
+      >
         <button
           onClick={props.onClose}
           className="popup__close-icon popup-image__close-icon"
