@@ -4,7 +4,7 @@
 
 
 
-https://kasper11001.github.io/mesto/
+https://kasper11001.github.io/mesto-react/
 
 
 
